@@ -1,9 +1,9 @@
 @import 'tailwindcss' ;
 
-html , body {
-  margin:  0;
-  padding : 0;
-  background-color: #001427 ;
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #001427;
 }
 
 .navBleu {
@@ -25,4 +25,17 @@ html , body {
 }
 .navHr {
   border-color: #005F73 ;
+}
+
+.homeMainH1{
+  font-family: 'Poppins', sans-serif ;
+  color : #598AFF ;
+}
+.homeMainH2{
+  font-family: 'Poppins', sans-serif ;
+  color : #0097F5 ;
+}
+.vertical-line {
+  border-left: 2px solid white ;
+  height: 100px ;
 }

@@ -22,13 +22,13 @@ const NavBar = () => {
   return (
     <nav className="bg-linear-to-r from-[#001427] via-[#003d82] to-[#001427] shadow-lg border-b border-[#00D0A6]/20 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <button
             onClick={() => handleNavigate('/')}
             className="flex items-center space-x-2 group hover:opacity-80 transition-opacity cursor-pointer"
           >
-            <div className="text-3xl font-bold bg-linear-to-r from-[#5B8CFF] to-[#00D0A6] bg-clip-text text-transparent ibm-thai-looped-font">
+            <div className="text-xl md:text-3xl font-bold bg-linear-to-r from-[#5B8CFF] to-[#00D0A6] bg-clip-text text-transparent ibm-thai-looped-font">
               GapAtica
             </div>
           </button>
