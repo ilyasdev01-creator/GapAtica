@@ -5,3 +5,24 @@ html , body {
   padding : 0;
   background-color: #001427 ;
 }
+
+.navBleu {
+  color: #5B8CFF ;
+}
+.navGreen {
+  color: #00D0A6 ; 
+}
+.ibm-thai-looped-font {
+  font-family: 'IBM Plex Sans Thai Looped', sans-serif ;
+}
+
+.jaro-font {
+  font-family: 'Jaro', sans-serif ;
+}
+
+.navBg {
+  background-color: #0A1A35 ;
+}
+.navHr {
+  border-color: #005F73 ;
+}

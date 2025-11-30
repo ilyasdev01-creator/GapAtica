@@ -5,6 +5,7 @@ import Explore from "./components/pages/Explore.tsx"
 import Contact from "./components/pages/Contact.tsx"
 import About from "./components/pages/About.tsx"
 import Footer from "./components/Footer.tsx"
+import Docs from "./components/pages/Docs.tsx"
 
 const App = () => {
   return (
@@ -18,6 +19,8 @@ const App = () => {
         <Route path="/contact" element = {<Contact />} />
 
         <Route path="/about" element = {<About />} />
+
+        <Route path="/docs" element = {<Docs />} />
       </Routes>
       <Footer />
     </div>
