@@ -1,9 +1,9 @@
 import { Routes , Route } from "react-router-dom"
 import NavBar from "./components/NavBar.tsx"
-import Home from "./pages/Home.tsx"
-import Explore from "./pages/Explore.tsx"
-import Contact from "./pages/Contact.tsx"
-import About from "./pages/About.tsx"
+import Home from "./components/pages/Home.tsx"
+import Explore from "./components/pages/Explore.tsx"
+import Contact from "./components/pages/Contact.tsx"
+import About from "./components/pages/About.tsx"
 import Footer from "./components/Footer.tsx"
 
 const App = () => {
