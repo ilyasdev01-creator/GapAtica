@@ -6,6 +6,8 @@ import Contact from "./pages/Contact.tsx"
 import About from "./pages/About.tsx"
 import Footer from "./components/Footer.tsx"
 import Docs from "./pages/Docs.tsx"
+import FrontEndExplore from "./components/FrontEndExplore.tsx"
+import ReactTailwind from "./tests/ReactTailwind.tsx"
 
 const App = () => {
   return (
@@ -21,6 +23,10 @@ const App = () => {
         <Route path="/about" element = {<About />} />
 
         <Route path="/docs" element = {<Docs />} />
+
+        <Route path="/frontend-explore" element = {<FrontEndExplore />} />
+
+        <Route path="/frontend-explore/react-tailwind" element = {<ReactTailwind />} />
       </Routes>
       <Footer />
     </div>
