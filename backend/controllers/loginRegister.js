@@ -20,7 +20,9 @@ async function register(req, res) {
 
     if (!validator.isStrongPassword(password, {
       minLength: 8,
-      minNumbers: 1
+      minNumbers: 1,
+      minUppercase: 0,
+      minSymbols: 0
     })) {
       return res.status(400).json({ success: false, message: "Please provide a stronger password" });
     }
