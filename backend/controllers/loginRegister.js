@@ -1,6 +1,7 @@
 import validator from 'validator';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
 
 async function register(req, res) {
   try {

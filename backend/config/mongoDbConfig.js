@@ -11,21 +11,9 @@ const mongoDbConnection = async () => {
       return;
     }
 
-    // Connection options for better reliability
-    const options = {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 30000, // 30 seconds
-      socketTimeoutMS: 45000, // 45 seconds
-      bufferCommands: false, // Disable mongoose buffering
-      maxPoolSize: 10, // Maintain up to 10 socket connections
-      retryWrites: true,
-      w: 'majority'
-    };
-
     console.log('Attempting to connect to MongoDB...');
 
-    await mongoose.connect(process.env.MONGO_URI, options);
+    await mongoose.connect(process.env.MONGO_URI);
     console.log('✅ Database Connected Successfully');
 
     // Event listeners for monitoring
