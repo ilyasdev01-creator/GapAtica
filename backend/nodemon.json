@@ -1,0 +1,14 @@
+{
+  "watch": ["server.js", "config", "routes", "controllers", "models"],
+  "ignore": [
+    "node_modules",
+    "uploads",
+    "dist",
+    "build",
+    ".env",
+    ".env.*",
+    "*.log",
+    "package-lock.json"
+  ],
+  "ext": "js,json"
+}
