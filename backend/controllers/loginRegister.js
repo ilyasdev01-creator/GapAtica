@@ -52,4 +52,32 @@ async function register(req, res) {
   }
 }
 
-export { register };
+async function login(req, res) {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ success: false, message: "Please provide full credentials" })
+    }
+
+    if (!validator.isEmail(email)) {
+      return res.status(400).json({ success: false, message: "Please provide a valid email" })
+    }
+    const userToLogin = await User.findOne({ email });
+    if (!userToLogin) {
+      return res.status(404).json({ success: false, message: "Invalid credentials" });
+    }
+    const comparasion = await bcrypt.compare(password, userToLogin.password)
+    if (!comparasion) {
+      return res.status(400).json({ success: false, message: "Invalid credentials" })
+    }
+    const payload = { userId: userToLogin._id, email: userToLogin.email };
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1d" })
+    res.status(200).json({ success: true, message: "Login Successfully", token });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Unknown error, please try again!" })
+  }
+}
+
+export { register, login };
