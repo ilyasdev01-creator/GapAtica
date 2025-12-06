@@ -8,12 +8,15 @@ import Footer from "./components/Footer.tsx"
 import Docs from "./pages/Docs.tsx"
 import FrontEndExplore from "./components/FrontEndExplore.tsx"
 import ReactTailwind from "./tests/ReactTailwind.tsx"
+import Login from "./components/Login.tsx"
 
 const App = () => {
   return (
     <div>
       <NavBar />
       <Routes>
+        <Route path="/login" element = {<Login />} />
+
         <Route path="/" element = {<Home />} />
 
         <Route path="/explore" element = {<Explore />} />
