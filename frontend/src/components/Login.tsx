@@ -1,7 +1,43 @@
 import { useState } from "react"
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
+  const navigate = useNavigate();
   const [state , setState] = useState('Login');
+  const [name , setName] = useState('');
+  const [email , setEmail] = useState('');
+  const [password , setPassword] = useState('');
+
+  const register = async () => {
+    try {
+      if (!name || !email || !password){
+        toast.error("Please provide all the credintals")
+        return;
+      }
+      if (password.length < 8) {
+        toast.error("Please provide a stronger password");
+        return ;
+      }
+      const credintals = {name , email , password};
+      const response = await axios.post(backendUrl + '/api/register' , {
+      credintals
+    })
+    if (!response.data.success){
+      toast.error(response.data.message)
+      return;
+    }
+    toast.success(response.data.message)
+    localStorage.setItem('token' , response.data.token)
+    navigate('/explore') 
+    } catch (error) {
+      console.log(error);
+      toast.error('Unkown error')
+    }
+   
+  }
   return (
     <main className="min-h-screen bg-linear-to-br from-[#001427] via-[#02263a] to-[#001827] flex items-center justify-center p-6">
       <div className="w-full max-w-md bg-[#071426]/80 backdrop-blur-sm border border-[#00D0A6]/10 rounded-2xl shadow-2xl p-8">
@@ -13,15 +49,24 @@ const Login = () => {
           <p className="text-sm text-[#9FD6FF]">Login to your account to continue</p>
         </header>
 
-        <form className="space-y-4" action="" aria-label="Login form">
+        <form
+        onClick={() => {
+          state === 'Sign' ?
+          register() : null;
+        }}
+         className="space-y-4" action="" aria-label="Login form">
           {
             state === 'Sign'? (
           <div>
             <label className="sr-only" htmlFor="email">Name</label>
             <input
+            onChange={(e) => {
+                 setName(e.target.value)
+            }}
               id="name"
               name="name"
               type="text"
+              
               placeholder="Your Name"
               className="w-full px-4 py-3 rounded-lg bg-[#011826] border border-transparent placeholder-[#5fa7d9] text-[#e6f7ff] focus:outline-none focus:ring-2 focus:ring-[#00D0A6]/60"
             />
@@ -32,6 +77,9 @@ const Login = () => {
           <div>
             <label className="sr-only" htmlFor="email">Email</label>
             <input
+            onChange={(e) => {
+                 setEmail(e.target.value)
+            }}
               id="email"
               name="email"
               type="email"
@@ -43,6 +91,9 @@ const Login = () => {
           <div>
             <label className="sr-only" htmlFor="password">Password</label>
             <input
+            onChange={(e) => {
+              setPassword(e.target.value)
+            }}
               id="password"
               name="password"
               type="password"
@@ -60,7 +111,9 @@ const Login = () => {
               type="submit"
               className="w-full py-3 rounded-lg bg-linear-to-r from-[#5B8CFF] to-[#00D0A6] text-black font-semibold shadow-md hover:scale-[1.01] transition-transform"
             >
-              Sign in
+              {
+                state === 'Login' ? "Sign In"  : "Sign Up"
+              }
             </button>
           </div>
         </form>
