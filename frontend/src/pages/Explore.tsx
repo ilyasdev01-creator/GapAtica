@@ -6,6 +6,7 @@ import {
   FaCloud 
  } from "react-icons/fa6"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify";
 
 const Explore = () => {
   const navigate = useNavigate() ;
@@ -33,6 +34,14 @@ const Explore = () => {
       , description : "Streamline software delivery and infrastructure management."
     }
   ]
+  const isUserLogin = () : boolean =>{
+    const token  = localStorage.getItem('token');
+    if (!token) {
+      toast.error('User not Logged In' ,{autoClose:1000});
+      return false
+    }
+    return true
+  }
   return (
     <main className="min-h-screen bg-[#001427] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -86,7 +95,12 @@ const Explore = () => {
                     {/* CTA Button */}
                     {!domain.comingSoon && (
                       <button
-                      onClick={() => navigate(`${domain.route}`)} 
+                      onClick={() => {
+                        if (isUserLogin()) {
+                          navigate(`${domain.route}`)
+                        }
+                        navigate('/login')
+                      }} 
                        className="mt-6 w-full py-2 px-4 bg-linear-to-r from-[#5B8CFF] to-[#00D0A6] hover:from-[#4b77e6] hover:to-[#00b391] text-black font-semibold rounded-lg transition-transform transform hover:scale-105">
                         Scan My Skills
                       </button>
