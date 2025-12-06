@@ -1,5 +1,7 @@
+import { useState } from "react"
 
 const Login = () => {
+  const [state , setState] = useState('Login');
   return (
     <main className="min-h-screen bg-linear-to-br from-[#001427] via-[#02263a] to-[#001827] flex items-center justify-center p-6">
       <div className="w-full max-w-md bg-[#071426]/80 backdrop-blur-sm border border-[#00D0A6]/10 rounded-2xl shadow-2xl p-8">
@@ -12,6 +14,21 @@ const Login = () => {
         </header>
 
         <form className="space-y-4" action="" aria-label="Login form">
+          {
+            state === 'Sign'? (
+          <div>
+            <label className="sr-only" htmlFor="email">Name</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Your Name"
+              className="w-full px-4 py-3 rounded-lg bg-[#011826] border border-transparent placeholder-[#5fa7d9] text-[#e6f7ff] focus:outline-none focus:ring-2 focus:ring-[#00D0A6]/60"
+            />
+          </div>
+            ): null
+          }
+         
           <div>
             <label className="sr-only" htmlFor="email">Email</label>
             <input
@@ -35,10 +52,6 @@ const Login = () => {
           </div>
 
           <div className="flex items-center justify-between text-sm text-[#9FD6FF]">
-            <label className="inline-flex items-center gap-2">
-              <input type="checkbox" className="w-4 h-4 rounded border-[#0f3a52] bg-[#011826]" />
-              <span>Remember me</span>
-            </label>
             <a className="text-[#5B8CFF] hover:underline" href="#">Forgot password?</a>
           </div>
 
@@ -53,8 +66,20 @@ const Login = () => {
         </form>
 
         <div className="mt-6 text-center text-sm text-[#9FD6FF]">
-          <p>
-            Don’t have an account? <a className="text-[#5B8CFF] hover:underline" href="#">Create an account</a>
+          <p
+          >
+            {
+              state === "Login"?(`Don’t have an account ?`)
+            : (`Have an account ?`)
+            } <a
+            onClick={() => {
+              state === 'Login' ? setState('Sign') : 
+              setState('Login')
+            }}
+             className="text-[#5B8CFF] hover:underline cursor-pointer">{
+               state === "Login"?(`Create an account`)
+            : (`Login To your account`)
+            }</a>
           </p>
         </div>
       </div>
