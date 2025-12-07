@@ -98,8 +98,9 @@ const Explore = () => {
                       onClick={() => {
                         if (isUserLogin()) {
                           navigate(`${domain.route}`)
+                        } else {
+                          navigate('/login')
                         }
-                        navigate('/login')
                       }} 
                        className="mt-6 w-full py-2 px-4 bg-linear-to-r from-[#5B8CFF] to-[#00D0A6] hover:from-[#4b77e6] hover:to-[#00b391] text-black font-semibold rounded-lg transition-transform transform hover:scale-105">
                         Scan My Skills
