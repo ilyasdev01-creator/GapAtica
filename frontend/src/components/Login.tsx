@@ -50,6 +50,32 @@ const Login = () => {
     }
   };
 
+  const login = async () => {
+    try {
+      if (!email || !password) {
+        toast.error('Please provide all the credentials')
+        return ;
+      }
+      const credentials = {email , password} ;
+      const response = await axios.post(backendUrl + '/api/login' , credentials);
+      if (!response.data.success) {
+        toast.error(response.data.message , {autoClose:1000});
+        return ;
+      }else{
+        toast.success(response.data.message , {autoClose:1000});
+        localStorage.setItem('token' , response.data.token);
+        navigate('/explore')
+      }
+    } catch (error : unknown) {
+      if (error instanceof Error) {
+        console.log(error);
+        toast.error(error.message , {autoClose:1000})
+      }else{
+        toast.error("An unknown error occurred please try again." , {autoClose:1000})
+      }
+    }
+  }
+
   return (
     <main className="min-h-screen bg-linear-to-br from-[#001427] via-[#02263a] to-[#001827] flex items-center justify-center p-6">
       <div className="w-full max-w-md bg-[#071426]/80 backdrop-blur-sm border border-[#00D0A6]/10 rounded-2xl shadow-2xl p-8">
@@ -70,6 +96,9 @@ const Login = () => {
           onSubmit={(e) => {
             e.preventDefault();  
             if (state === "Sign") register();
+            else {
+              login() 
+            }
           }}
           className="space-y-4"
         >
