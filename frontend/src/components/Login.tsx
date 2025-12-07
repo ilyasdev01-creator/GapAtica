@@ -32,17 +32,21 @@ const Login = () => {
       );
 
       if (!response.data.success) {
-        toast.error(response.data.message);
+        toast.error(response.data.message , {autoClose:1000});
         return;
       }
 
-      toast.success(response.data.message);
+      toast.success(response.data.message , {autoClose:1000});
       localStorage.setItem("token", response.data.token);
       navigate("/explore");
 
-    } catch (error) {
-      console.log(error);
-      toast.error("Unknown error");
+    } catch (error : unknown) {
+      if (error instanceof Error) {
+        console.log(error);
+        toast.error(error.message , {autoClose:1000});
+      }else{
+        toast.error("An unknown error occurred please try again." , {autoClose:1000})
+      }
     }
   };
 
