@@ -40,5 +40,3 @@ body {
   border-left: 2px solid white;
   height: 100px;
 }
-
-/* Removed custom toast styling — using default react-toastify styles */
