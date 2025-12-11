@@ -10,6 +10,7 @@ import FrontEndExplore from "./components/FrontEndExplore.tsx";
 import ReactTailwind from "./tests/ReactTailwind.tsx";
 import Login from "./components/Login.tsx";
 import VueTailwind from "./tests/VueTailwind.tsx";
+import AngularTailwind from "./tests/AngularTailwind.tsx";
 
 const App = () => {
   return (
@@ -38,6 +39,10 @@ const App = () => {
         <Route
           path="/frontend-explore/vue-tailwind"
           element={<VueTailwind />}
+        />
+        <Route
+          path="/frontend-explore/angular-tailwind"
+          element={<AngularTailwind />}
         />
       </Routes>
       <Footer />
