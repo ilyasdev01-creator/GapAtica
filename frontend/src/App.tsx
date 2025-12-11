@@ -11,6 +11,7 @@ import ReactTailwind from "./tests/ReactTailwind.tsx";
 import Login from "./components/Login.tsx";
 import VueTailwind from "./tests/VueTailwind.tsx";
 import AngularTailwind from "./tests/AngularTailwind.tsx";
+import NextjsTailwind from "./tests/NextjsTailwind.tsx";
 
 const App = () => {
   return (
@@ -43,6 +44,10 @@ const App = () => {
         <Route
           path="/frontend-explore/angular-tailwind"
           element={<AngularTailwind />}
+        />
+        <Route
+          path="/frontend-explore/next-tailwind"
+          element={<NextjsTailwind />}
         />
       </Routes>
       <Footer />
