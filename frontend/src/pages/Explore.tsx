@@ -95,10 +95,7 @@ const Explore = () => {
                 {/* Card */}
                 <button
                   disabled={domain.comingSoon}
-                  onClick={() =>
-                    !domain.comingSoon &&
-                    console.log(`Exploring ${domain.name}`)
-                  }
+                  onClick={() => !domain.comingSoon && console.log()}
                   className={`w-full p-8 bg-linear-to-br from-[#0b2a47] to-[#071f3a] rounded-xl border border-[#00D0A6]/20 transition-all duration-300 ${
                     domain.comingSoon
                       ? "cursor-not-allowed"
@@ -138,7 +135,8 @@ const Explore = () => {
 
                   {/* CTA Button */}
                   {!domain.comingSoon && (
-                    <button
+                    <div
+                      role="button"
                       onClick={() => {
                         if (isUserLogin()) {
                           navigate(`${domain.route}`);
@@ -149,7 +147,7 @@ const Explore = () => {
                       className="mt-6 w-full py-2 px-4 bg-linear-to-r from-[#5B8CFF] to-[#00D0A6] hover:from-[#4b77e6] hover:to-[#00b391] text-black font-semibold rounded-lg transition-transform transform hover:scale-105"
                     >
                       Scan My Skills
-                    </button>
+                    </div>
                   )}
                 </button>
               </div>
