@@ -13,6 +13,7 @@ import VueTailwind from "./tests/VueTailwind.tsx";
 import AngularTailwind from "./tests/AngularTailwind.tsx";
 import NextjsTailwind from "./tests/NextjsTailwind.tsx";
 import BackEndExplore from "./components/BackEndExplore.tsx";
+import NodeExpress from "./tests/NodeExpress.tsx";
 
 const App = () => {
   return (
@@ -52,6 +53,7 @@ const App = () => {
           path="/frontend-explore/next-tailwind"
           element={<NextjsTailwind />}
         />
+        <Route path="/backend-explore/node-express" element={<NodeExpress />} />
       </Routes>
       <Footer />
     </div>
