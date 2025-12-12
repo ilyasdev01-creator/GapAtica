@@ -1,8 +1,9 @@
-import { useState } from "react"
+import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
+import { FaGithub } from "react-icons/fa";
+import GoogleButton from "../utils/googleButton.tsx";
 const Login = () => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const navigate = useNavigate();
@@ -32,20 +33,21 @@ const Login = () => {
       );
 
       if (!response.data.success) {
-        toast.error(response.data.message , {autoClose:1000});
+        toast.error(response.data.message, { autoClose: 1000 });
         return;
       }
 
-      toast.success(response.data.message , {autoClose:1000});
+      toast.success(response.data.message, { autoClose: 1000 });
       localStorage.setItem("token", response.data.token);
       navigate("/explore");
-
-    } catch (error : unknown) {
+    } catch (error: unknown) {
       if (error instanceof Error) {
         console.log(error);
-        toast.error(error.message , {autoClose:1000});
-      }else{
-        toast.error("An unknown error occurred please try again." , {autoClose:1000})
+        toast.error(error.message, { autoClose: 1000 });
+      } else {
+        toast.error("An unknown error occurred please try again.", {
+          autoClose: 1000,
+        });
       }
     }
   };
@@ -53,33 +55,34 @@ const Login = () => {
   const login = async () => {
     try {
       if (!email || !password) {
-        toast.error('Please provide all the credentials')
-        return ;
+        toast.error("Please provide all the credentials");
+        return;
       }
-      const credentials = {email , password} ;
-      const response = await axios.post(backendUrl + '/api/login' , credentials);
+      const credentials = { email, password };
+      const response = await axios.post(backendUrl + "/api/login", credentials);
       if (!response.data.success) {
-        toast.error(response.data.message , {autoClose:1000});
-        return ;
-      }else{
-        toast.success(response.data.message , {autoClose:1000});
-        localStorage.setItem('token' , response.data.token);
-        navigate('/explore')
+        toast.error(response.data.message, { autoClose: 1000 });
+        return;
+      } else {
+        toast.success(response.data.message, { autoClose: 1000 });
+        localStorage.setItem("token", response.data.token);
+        navigate("/explore");
       }
-    } catch (error : unknown) {
+    } catch (error: unknown) {
       if (error instanceof Error) {
         console.log(error);
-        toast.error(error.message , {autoClose:1000})
-      }else{
-        toast.error("An unknown error occurred please try again." , {autoClose:1000})
+        toast.error(error.message, { autoClose: 1000 });
+      } else {
+        toast.error("An unknown error occurred please try again.", {
+          autoClose: 1000,
+        });
       }
     }
-  }
+  };
 
   return (
     <main className="min-h-screen bg-linear-to-br from-[#001427] via-[#02263a] to-[#001827] flex items-center justify-center p-6">
       <div className="w-full max-w-md bg-[#071426]/80 backdrop-blur-sm border border-[#00D0A6]/10 rounded-2xl shadow-2xl p-8">
-        
         <header className="text-center mb-6">
           <div className="inline-block mb-4">
             <div className="text-3xl font-bold bg-linear-to-r from-[#5B8CFF] to-[#00D0A6] bg-clip-text text-transparent">
@@ -94,18 +97,19 @@ const Login = () => {
 
         <form
           onSubmit={(e) => {
-            e.preventDefault();  
+            e.preventDefault();
             if (state === "Sign") register();
             else {
-              login() 
+              login();
             }
           }}
           className="space-y-4"
         >
-
           {state === "Sign" && (
             <div>
-              <label className="sr-only" htmlFor="name">Name</label>
+              <label className="sr-only" htmlFor="name">
+                Name
+              </label>
               <input
                 onChange={(e) => setName(e.target.value)}
                 id="name"
@@ -117,7 +121,9 @@ const Login = () => {
           )}
 
           <div>
-            <label className="sr-only" htmlFor="email">Email</label>
+            <label className="sr-only" htmlFor="email">
+              Email
+            </label>
             <input
               onChange={(e) => setEmail(e.target.value)}
               id="email"
@@ -128,7 +134,9 @@ const Login = () => {
           </div>
 
           <div>
-            <label className="sr-only" htmlFor="password">Password</label>
+            <label className="sr-only" htmlFor="password">
+              Password
+            </label>
             <input
               onChange={(e) => setPassword(e.target.value)}
               id="password"
@@ -142,6 +150,11 @@ const Login = () => {
             <a className="text-[#5B8CFF] hover:underline" href="#">
               Forgot password?
             </a>
+            {/* github and google login */}
+            <div className="flex items-center justify-between gap-5.5 text-xl cursor-pointer">
+              <FaGithub />
+              <GoogleButton />
+            </div>
           </div>
 
           <div className="pt-2">
@@ -160,9 +173,7 @@ const Login = () => {
               ? "Don’t have an account ?"
               : "Have an account ?"}{" "}
             <a
-              onClick={() =>
-                setState(state === "Login" ? "Sign" : "Login")
-              }
+              onClick={() => setState(state === "Login" ? "Sign" : "Login")}
               className="text-[#5B8CFF] hover:underline cursor-pointer"
             >
               {state === "Login"
@@ -171,7 +182,6 @@ const Login = () => {
             </a>
           </p>
         </div>
-
       </div>
     </main>
   );
