@@ -7,6 +7,8 @@ import GoogleButton from "../utils/googleButton.tsx";
 const Login = () => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const navigate = useNavigate();
+  const githubClientId = import.meta.env.VITE_GITHUB_CLIENT_ID;
+  const redirectUri = backendUrl + "/api/auth/github/callback";
 
   const [state, setState] = useState("Login");
   const [name, setName] = useState("");
@@ -50,6 +52,10 @@ const Login = () => {
         });
       }
     }
+  };
+
+  const handleGithubLogin = () => {
+    window.location.href = `https://github.com/login/oauth/authorize?client_id=${githubClientId}&scope=user:email&redirect_uri=${redirectUri}`;
   };
 
   const login = async () => {
@@ -152,7 +158,7 @@ const Login = () => {
             </a>
             {/* github and google login */}
             <div className="flex items-center justify-between gap-5.5 text-xl cursor-pointer">
-              <FaGithub />
+              <FaGithub onClick={handleGithubLogin} />
               <GoogleButton />
             </div>
           </div>

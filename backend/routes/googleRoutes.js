@@ -6,4 +6,4 @@ const googleRoute = express.Router();
 
 googleRoute.post("/registerGoogle", rl, googleRegister)
 
-export default googleRegister;
+export default googleRoute;

@@ -3,8 +3,8 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoDbConnection from './config/mongoDbConfig.js';
 import userRoute from './routes/userRoutes.js';
-import { googleRegister } from './controllers/googleLogin.js';
-
+import googleRoute from './routes/googleRoutes.js';
+import githubRoute from './routes/githubRoutes.js';
 dotenv.config();
 const app = express();
 
@@ -18,7 +18,8 @@ app.get('/', (req, res) => {
   res.json("Server is running");
 });
 app.use('/api', userRoute);
-app.use('/api', googleRegister);
+app.use('/api', googleRoute);
+app.use('/api', githubRoute)
 
 const startServer = async () => {
   try {
