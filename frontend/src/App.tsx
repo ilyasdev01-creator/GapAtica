@@ -16,6 +16,7 @@ import BackEndExplore from "./components/BackEndExplore.tsx";
 import NodeExpress from "./tests/NodeExpress.tsx";
 import Django from "./tests/Django.tsx";
 import Laravel from "./tests/Laravel.tsx";
+import SpringBoot from "./tests/SpringBoot.tsx";
 
 const App = () => {
   return (
@@ -60,6 +61,8 @@ const App = () => {
         <Route path="/backend-explore/django" element={<Django />} />
 
         <Route path="/backend-explore/laravel" element={<Laravel />} />
+
+        <Route path="/backend-explore/spring-boot" element={<SpringBoot />} />
       </Routes>
       <Footer />
     </div>
