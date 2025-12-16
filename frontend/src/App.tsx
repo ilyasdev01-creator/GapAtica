@@ -15,6 +15,7 @@ import NextjsTailwind from "./tests/NextjsTailwind.tsx";
 import BackEndExplore from "./components/BackEndExplore.tsx";
 import NodeExpress from "./tests/NodeExpress.tsx";
 import Django from "./tests/Django.tsx";
+import Laravel from "./tests/Laravel.tsx";
 
 const App = () => {
   return (
@@ -57,6 +58,8 @@ const App = () => {
         <Route path="/backend-explore/node-express" element={<NodeExpress />} />
 
         <Route path="/backend-explore/django" element={<Django />} />
+
+        <Route path="/backend-explore/laravel" element={<Laravel />} />
       </Routes>
       <Footer />
     </div>
