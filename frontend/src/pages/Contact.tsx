@@ -2,13 +2,12 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-[#071426] text-white">
       {/* Hero Section */}
-      <div className="relative h-96 overflow-hidden">
-        <div className="absolute inset-0 bg-transparent bg-opacity-50 flex items-center justify-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-black ibm-thai-looped-font text-center">
-            Contact Us
-          </h1>
-        </div>
-      </div>
+      <h1 className="flex justify-center pt-10 text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 homeMainH1">
+        Contact Us
+      </h1>
+      <p className="flex justify-center text-lg sm:text-xl text-[#9FD6FF] max-w-2xl mx-auto mb-8 homeMainH2">
+        Contact our team and we will be happy to response.
+      </p>
 
       {/* Contact Information Section */}
       <div className="max-w-4xl mx-auto px-4 py-16">
