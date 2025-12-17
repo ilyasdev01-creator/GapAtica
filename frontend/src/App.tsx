@@ -17,12 +17,15 @@ import NodeExpress from "./tests/NodeExpress.tsx";
 import Django from "./tests/Django.tsx";
 import Laravel from "./tests/Laravel.tsx";
 import SpringBoot from "./tests/SpringBoot.tsx";
+import BookAMetting from "./pages/BookAMeeting.tsx";
 
 const App = () => {
   return (
     <div>
       <NavBar />
       <Routes>
+        {/* Main pages routes */}
+
         <Route path="/login" element={<Login />} />
 
         <Route path="/" element={<Home />} />
@@ -35,9 +38,15 @@ const App = () => {
 
         <Route path="/docs" element={<Docs />} />
 
+        <Route path="/book-meeting" element={<BookAMetting />} />
+
+        {/* Home test routes */}
+
         <Route path="/frontend-explore" element={<FrontEndExplore />} />
 
         <Route path="/backend-explore" element={<BackEndExplore />} />
+
+        {/* Home test routes */}
 
         <Route
           path="/frontend-explore/react-tailwind"
@@ -56,6 +65,7 @@ const App = () => {
           path="/frontend-explore/next-tailwind"
           element={<NextjsTailwind />}
         />
+
         <Route path="/backend-explore/node-express" element={<NodeExpress />} />
 
         <Route path="/backend-explore/django" element={<Django />} />

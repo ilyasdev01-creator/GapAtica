@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 const Contact = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-[#071426] text-white">
       {/* Hero Section */}
@@ -65,6 +68,9 @@ const Contact = () => {
           <div className="mt-12 text-center">
             <div className="bg-[#0b2a47] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 border border-[#00D0A6]/30">
               <svg
+                onClick={() => {
+                  navigate("/book-meeting");
+                }}
                 className="w-8 h-8 cursor-pointer text-[#9FD6FF]"
                 fill="none"
                 stroke="currentColor"
