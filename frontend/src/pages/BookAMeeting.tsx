@@ -1,10 +1,10 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const BookAMeeting = () => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
-  const UnAvailableDates: string[] = [];
+  const [unavailableDates, setUnavailableDates] = useState<string[]>([]);
   const getBookedTimes = async () => {
     const token = localStorage.getItem("token");
 
@@ -26,8 +26,10 @@ const BookAMeeting = () => {
         toast.error("Unknown error please try again");
         return;
       }
-      UnAvailableDates.push(data[0].bookedTime);
-      console.log(UnAvailableDates);
+      setUnavailableDates(
+        data.map((item: { bookedTime: string }) => item.bookedTime)
+      );
+      console.log(unavailableDates);
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.log(error);
@@ -42,6 +44,19 @@ const BookAMeeting = () => {
   useEffect(() => {
     getBookedTimes();
   }, []);
+
+  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+  const times = [
+    "9:00 AM",
+    "10:00 AM",
+    "11:00 AM",
+    "12:00 PM",
+    "1:00 PM",
+    "2:00 PM",
+    "3:00 PM",
+    "4:00 PM",
+    "5:00 PM",
+  ];
   return (
     <div className="min-h-screen bg-[#001427] text-white px-4 sm:px-8 md:px-16 py-12">
       {/* Header section */}
@@ -59,14 +74,10 @@ const BookAMeeting = () => {
         <table className="min-w-full border border-[#0a1a33] divide-y divide-[#0a1a33] rounded-xl shadow-lg shadow-[#0a1a33]/50">
           <thead className="bg-[#0a1a33]">
             <tr>
-              {[
-                "Time",
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-              ].map((day) => (
+              <th className="px-4 py-3 text-left font-semibold text-[#9FD6FF] border-b border-[#0a1a33]">
+                Time
+              </th>
+              {days.map((day) => (
                 <th
                   key={day}
                   className="px-4 py-3 text-left font-semibold text-[#9FD6FF] border-b border-[#0a1a33]"
@@ -78,67 +89,28 @@ const BookAMeeting = () => {
           </thead>
 
           <tbody>
-            {[
-              "9:00 AM",
-              "10:00 AM",
-              "11:00 AM",
-              "12:00 PM",
-              "1:00 PM",
-              "2:00 PM",
-              "3:00 PM",
-              "4:00 PM",
-              "5:00 PM",
-            ].map((time, idx) => (
+            {times.map((time) => (
               <tr
                 key={time}
                 className={`transition-all duration-300 hover:scale-105 hover:bg-[#002140]`}
               >
                 <td className="px-4 py-2 border-b border-[#0a1a33]">{time}</td>
-                <td
-                  className={`px-4 py-2 font-semibold border-b border-[#0a1a33] ${
-                    idx % 2 === 0
-                      ? "text-green-400 animate-pulse"
-                      : "text-red-500 animate-pulse"
-                  }`}
-                >
-                  {idx % 2 === 0 ? "Available" : "Booked"}
-                </td>
-                <td
-                  className={`px-4 cursor-pointer py-2 font-semibold border-b border-[#0a1a33] ${
-                    idx % 3 === 0
-                      ? "text-red-500 animate-pulse"
-                      : "text-green-400 animate-pulse"
-                  }`}
-                >
-                  {idx % 3 === 0 ? "Booked" : "Available"}
-                </td>
-                <td
-                  className={`px-4 py-2 font-semibold border-b border-[#0a1a33] ${
-                    idx % 2 === 0
-                      ? "text-green-400 animate-pulse"
-                      : "text-red-500 animate-pulse"
-                  }`}
-                >
-                  {idx % 2 === 0 ? "Available" : "Booked"}
-                </td>
-                <td
-                  className={`px-4 py-2 font-semibold border-b border-[#0a1a33] ${
-                    idx % 3 === 0
-                      ? "text-red-500 animate-pulse"
-                      : "text-green-400 animate-pulse"
-                  }`}
-                >
-                  {idx % 3 === 0 ? "Booked" : "Available"}
-                </td>
-                <td
-                  className={`px-4 py-2 font-semibold border-b border-[#0a1a33] ${
-                    idx % 2 === 0
-                      ? "text-green-400 animate-pulse"
-                      : "text-red-500 animate-pulse"
-                  }`}
-                >
-                  {idx % 2 === 0 ? "Available" : "Booked"}
-                </td>
+                {days.map((day) => {
+                  const slot = `${day} ${time}`;
+                  const isBooked = unavailableDates.includes(slot);
+                  return (
+                    <td
+                      key={day}
+                      className={`px-4 py-2 font-semibold border-b border-[#0a1a33] ${
+                        isBooked
+                          ? "text-red-500 animate-pulse"
+                          : "text-green-400 animate-pulse"
+                      }`}
+                    >
+                      {isBooked ? "Booked" : "Available"}
+                    </td>
+                  );
+                })}
               </tr>
             ))}
           </tbody>

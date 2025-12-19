@@ -3,7 +3,7 @@ import mongoose, { mongo, MongooseError } from "mongoose";
 
 const meetingSchema = new mongoose.Schema({
   name: { type: String },
-  email: { type: String, unique: true },
+  email: { type: String },
   bookedTime: { type: String }
 });
 
