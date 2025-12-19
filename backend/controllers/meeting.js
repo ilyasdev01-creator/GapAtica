@@ -27,9 +27,29 @@ const bookMeeting = async (req, res) => {
     res.json({ success: true, message: "booked a meeting successfully" })
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: "Unknown" })
+    res.json({ success: false, message: "Unknown error please try again" })
   }
 }
 
 
-export { bookMeeting }
+const getAllBookedTimes = async (req, res) => {
+  const { token } = req.headers;
+
+  try {
+    if (!token) {
+      return res.json({ success: false, message: "please provide a token" })
+    }
+    const GOODTOKEN = jwt.verify(token, process.env.JWT_SECRET);
+
+    if (!GOODTOKEN) {
+      return res.json({ success: false, messsage: "please provide a valid token" })
+    }
+    const meetingData = await meeting.find({}).select("bookedTime -_id");
+    res.json({ success: true, meetingData })
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: "Unknown error please try again" })
+  }
+}
+
+export { bookMeeting, getAllBookedTimes }
