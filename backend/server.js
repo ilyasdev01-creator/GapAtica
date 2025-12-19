@@ -5,6 +5,7 @@ import mongoDbConnection from './config/mongoDbConfig.js';
 import userRoute from './routes/userRoutes.js';
 import googleRoute from './routes/googleRoutes.js';
 import githubRoute from './routes/githubRoutes.js';
+import meetingRoute from './routes/meetingRoutes.js';
 dotenv.config();
 const app = express();
 
@@ -19,7 +20,8 @@ app.get('/', (req, res) => {
 });
 app.use('/api', userRoute);
 app.use('/api', googleRoute);
-app.use('/api', githubRoute)
+app.use('/api', githubRoute);
+app.use('/api', meetingRoute)
 
 const startServer = async () => {
   try {
