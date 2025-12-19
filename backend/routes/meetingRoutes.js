@@ -7,7 +7,7 @@ const meetingRoute = express.Router();
 
 
 meetingRoute.post('/meetings/bookmeeting', rl, bookMeeting)
-meetingRoute.post('/meetings/getBookedTimes', getAllBookedTimes)
+meetingRoute.get('/meetings/getBookedTimes', getAllBookedTimes)
 
 
 

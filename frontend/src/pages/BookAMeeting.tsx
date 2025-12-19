@@ -1,4 +1,47 @@
+import axios from "axios";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+
 const BookAMeeting = () => {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const UnAvailableDates: string[] = [];
+  const getBookedTimes = async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      if (!token) {
+        toast.error("please provide a token");
+        return;
+      }
+      const response = await axios.get(
+        backendUrl + "/api/meetings/getBookedTimes",
+        { headers: { token } }
+      );
+      if (!response.data.success) {
+        toast.error(response.data.message);
+        return;
+      }
+      const data = response.data.meetingData;
+      if (!data) {
+        toast.error("Unknown error please try again");
+        return;
+      }
+      UnAvailableDates.push(data[0].bookedTime);
+      console.log(UnAvailableDates);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(error);
+        toast.error(error.message, { autoClose: 1000 });
+      } else {
+        toast.error("An unknown error occurred please try again.", {
+          autoClose: 1000,
+        });
+      }
+    }
+  };
+  useEffect(() => {
+    getBookedTimes();
+  }, []);
   return (
     <div className="min-h-screen bg-[#001427] text-white px-4 sm:px-8 md:px-16 py-12">
       {/* Header section */}
