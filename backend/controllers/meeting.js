@@ -52,4 +52,36 @@ const getAllBookedTimes = async (req, res) => {
   }
 }
 
-export { bookMeeting, getAllBookedTimes }
+const deleteMeeting = async (req, res) => {
+  const { Stringdate, DbDate } = req.body;
+  const { token } = req.headers;
+
+  try {
+    if (!Stringdate || !DbDate) {
+      return res.json({ success: false, message: "please provide a date" })
+    }
+    if (!token) {
+      return res.json({ success: false, message: "please provide a token" })
+    }
+
+    const GOODTOKEN = jwt.verify(token, process.env.JWT_SECRET);
+    if (!GOODTOKEN) {
+      return res.json({ success: false, message: "please provide a valid token" })
+    }
+
+    const bookedDate = new Date(Stringdate);
+    const endTime = new Date(bookedDate.getTime() + 60 * 60 * 1000); // add 1 hour
+
+    if (new Date() > endTime) {
+      await meeting.deleteOne({ bookedTime: DbDate });
+      res.json({ success: true, message: "meeting deleted successfully" })
+    } else {
+      res.json({ success: false, message: "meeting is not yet over" })
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: "Unknown error please try again" })
+  }
+}
+
+export { bookMeeting, getAllBookedTimes, deleteMeeting }
