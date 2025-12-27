@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 app.use('/api', userRoute);
 app.use('/api', googleRoute);
 app.use('/api', githubRoute);
-app.use('/api', meetingRoute)
+app.use('/api/meetings', meetingRoute)
 
 const startServer = async () => {
   try {
