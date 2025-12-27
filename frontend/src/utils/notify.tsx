@@ -1,4 +1,5 @@
-import { toast, ToastOptions } from "react-toastify";
+import { toast } from "react-toastify";
+import type { ToastOptions } from "react-toastify";
 
 const baseOptions: ToastOptions = {
   autoClose: 3000,

@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 
 const About = () => {
-  const [activeTab, setActiveTab] = useState("how-it-works");
   const [animatedValues, setAnimatedValues] = useState({
     users: 0,
     tests: 0,
