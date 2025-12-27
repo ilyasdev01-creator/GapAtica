@@ -430,7 +430,7 @@ const BookAMeeting = () => {
   }, [getWeekDates, bookedMeetings]);
 
   // Filter slots based on filters
-  const filteredSlots = useMemo(() => {
+  useMemo(() => {
     return meetingSlots.map((row) =>
       row.filter((slot) => {
         if (slot.isBooked && !filters.showBooked) return false;
